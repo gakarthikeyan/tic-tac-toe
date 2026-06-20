@@ -39,4 +39,16 @@ data class GameBoard(
         }
         return false
     }
+
+    fun hasWinningDiagonal(gamePlayer: GamePlayer): Boolean {
+        // diagonal: 0-4-8
+        if (cells[0] == gamePlayer && cells[4] == gamePlayer && cells[8] == gamePlayer) {
+            return true
+        }
+        // diagonal: 2-4-6
+        if (cells[2] == gamePlayer && cells[4] == gamePlayer && cells[6] == gamePlayer) {
+            return true
+        }
+        return false
+    }
 }

@@ -115,4 +115,34 @@ class GameBoardTest {
         val gameBoard = GameBoard(cells)
         assertFalse(gameBoard.hasWinningColumn(GamePlayer.O))
     }
+
+    @Test
+    fun `can check if player has winning diagonal (top-left to bottom-right)`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ZERO] = GamePlayer.X
+        cells[CELL_POSITION_FOUR] = GamePlayer.X
+        cells[CELL_POSITION_EIGHT] = GamePlayer.X
+        val gameBoard = GameBoard(cells)
+        assertTrue(gameBoard.hasWinningDiagonal(GamePlayer.X))
+    }
+
+    @Test
+    fun `can check if player has winning diagonal (top-right to bottom-left)`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_TWO] = GamePlayer.O
+        cells[CELL_POSITION_FOUR] = GamePlayer.O
+        cells[CELL_POSITION_SIX] = GamePlayer.O
+        val gameBoard = GameBoard(cells)
+        assertTrue(gameBoard.hasWinningDiagonal(GamePlayer.O))
+    }
+
+    @Test
+    fun `player without winning diagonal returns false`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ZERO] = GamePlayer.X
+        cells[CELL_POSITION_FOUR] = GamePlayer.O
+        cells[CELL_POSITION_EIGHT] = GamePlayer.X
+        val gameBoard = GameBoard(cells)
+        assertFalse(gameBoard.hasWinningDiagonal(GamePlayer.X))
+    }
 }
