@@ -63,4 +63,14 @@ class GameBoardTest {
         val result = newBoard.markPlayerPlace(CELL_POSITION_TWO, GamePlayer.O)
         assertEquals(newBoard, result)
     }
+
+    @Test
+    fun `can check if player has winning row`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ZERO] = GamePlayer.X
+        cells[CELL_POSITION_ONE] = GamePlayer.X
+        cells[CELL_POSITION_TWO] = GamePlayer.X
+        val gameBoard = GameBoard(cells)
+        assertTrue(gameBoard.hasWinningRow(GamePlayer.X))
+    }
 }
