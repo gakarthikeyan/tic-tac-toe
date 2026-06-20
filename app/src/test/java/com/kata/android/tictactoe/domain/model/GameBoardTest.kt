@@ -36,4 +36,16 @@ class GameBoardTest {
         val newBoard = gameBoard.markPlayerPlace(CELL_POSITION_ONE, GamePlayer.O)
         assertFalse(newBoard.isCellEmpty(CELL_POSITION_ONE))
     }
+
+    @Test
+    fun `board is full when all cells are occupied`() {
+        val gameBoard = GameBoard(
+            cells = MutableList(BOARD_CELL_COUNT) {
+                GamePlayer.X; GamePlayer.O; GamePlayer.X;
+                GamePlayer.O; GamePlayer.X; GamePlayer.O;
+                GamePlayer.X; GamePlayer.O; GamePlayer.X
+            }
+        )
+        assertTrue(gameBoard.isBoardFull())
+    }
 }

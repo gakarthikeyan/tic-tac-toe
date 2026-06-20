@@ -15,4 +15,6 @@ data class GameBoard(
         newCells[position] = gamePlayer
         return GameBoard(newCells)
     }
+
+    fun isBoardFull(): Boolean = cells.all { it != null }
 }
