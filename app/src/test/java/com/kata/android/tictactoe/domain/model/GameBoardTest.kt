@@ -1,7 +1,10 @@
 package com.kata.android.tictactoe.domain.model
 
 import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FIVE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FOUR
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_THREE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
 import junit.framework.TestCase.assertEquals
@@ -72,5 +75,18 @@ class GameBoardTest {
         cells[CELL_POSITION_TWO] = GamePlayer.X
         val gameBoard = GameBoard(cells)
         assertTrue(gameBoard.hasWinningRow(GamePlayer.X))
+    }
+
+    @Test
+    fun `player without winning row returns false`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ZERO] = GamePlayer.X
+        cells[CELL_POSITION_ONE] = GamePlayer.O
+        cells[CELL_POSITION_TWO] = GamePlayer.X
+        cells[CELL_POSITION_THREE] = GamePlayer.O
+        cells[CELL_POSITION_FOUR] = GamePlayer.X
+        cells[CELL_POSITION_FIVE] = GamePlayer.O
+        val gameBoard = GameBoard(cells)
+        assertFalse(gameBoard.hasWinningRow(GamePlayer.O))
     }
 }
