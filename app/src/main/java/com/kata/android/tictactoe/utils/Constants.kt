@@ -9,4 +9,7 @@ object Constants {
     const val CELL_POSITION_THREE = 3
     const val CELL_POSITION_FOUR = 4
     const val CELL_POSITION_FIVE = 5
+    const val CELL_POSITION_SIX = 6
+    const val CELL_POSITION_SEVEN = 7
+    const val CELL_POSITION_EIGHT = 8
 }

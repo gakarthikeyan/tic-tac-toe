@@ -29,4 +29,14 @@ data class GameBoard(
         }
         return false
     }
+
+    fun hasWinningColumn(gamePlayer: GamePlayer): Boolean {
+        // Columns: 0-3-6, 1-4-7, 2-5-8
+        for (col in 0..2) {
+            if (cells[col] == gamePlayer && cells[col + 3] == gamePlayer && cells[col + 6] == gamePlayer) {
+                return true
+            }
+        }
+        return false
+    }
 }

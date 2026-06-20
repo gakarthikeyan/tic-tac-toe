@@ -1,9 +1,12 @@
 package com.kata.android.tictactoe.domain.model
 
 import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_EIGHT
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FIVE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FOUR
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SEVEN
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SIX
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_THREE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
@@ -88,5 +91,28 @@ class GameBoardTest {
         cells[CELL_POSITION_FIVE] = GamePlayer.O
         val gameBoard = GameBoard(cells)
         assertFalse(gameBoard.hasWinningRow(GamePlayer.O))
+    }
+
+    @Test
+    fun `can check if player has winning column`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ZERO] = GamePlayer.X
+        cells[CELL_POSITION_THREE] = GamePlayer.X
+        cells[CELL_POSITION_SIX] = GamePlayer.X
+        val gameBoard = GameBoard(cells)
+        assertTrue(gameBoard.hasWinningColumn(GamePlayer.X))
+    }
+
+    @Test
+    fun `player without winning column returns false`() {
+        val cells = MutableList<GamePlayer?>(BOARD_CELL_COUNT)  { null }
+        cells[CELL_POSITION_ONE] = GamePlayer.X
+        cells[CELL_POSITION_FOUR] = GamePlayer.O
+        cells[CELL_POSITION_SEVEN] = GamePlayer.X
+        cells[CELL_POSITION_TWO] = GamePlayer.X
+        cells[CELL_POSITION_FIVE] = GamePlayer.O
+        cells[CELL_POSITION_EIGHT] = GamePlayer.X
+        val gameBoard = GameBoard(cells)
+        assertFalse(gameBoard.hasWinningColumn(GamePlayer.O))
     }
 }
