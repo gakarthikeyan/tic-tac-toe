@@ -1,28 +1,18 @@
 package com.kata.android.tictactoe.domain.model
 
-import kotlin.collections.contentEquals
-import kotlin.collections.contentHashCode
+import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
 
-/**
- * Game Tic-Tac-Toe with TDD approach.
- *
- * Game board model for check multiple approch
- * like fullfil the Board state casestudy requirements and cover all
- * possible scenarios.
- *
- * @author Karthikeyan G
- */
 data class GameBoard(
-    val cells: Array<GamePlayer?> = Array(9) { null }
+    val cells: List<GamePlayer?> = MutableList(BOARD_CELL_COUNT) { null }
 ) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is GameBoard) return false
-        return cells.contentEquals(other.cells)
-    }
 
-    override fun hashCode(): Int {
-        return cells.contentHashCode()
-    }
+    fun isCellEmpty(position: Int): Boolean = cells[position] == null
 
+    fun markPlayerPlace(position: Int, gamePlayer: GamePlayer): GameBoard {
+        if (!isCellEmpty(position)) return this
+
+        val newCells = cells.toMutableList()
+        newCells[position] = gamePlayer
+        return GameBoard(newCells)
+    }
 }
