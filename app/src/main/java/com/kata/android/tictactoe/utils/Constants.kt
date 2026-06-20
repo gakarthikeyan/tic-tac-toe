@@ -5,4 +5,5 @@ object Constants {
     const val BOARD_CELL_COUNT = 9
     const val CELL_POSITION_ZERO = 0
     const val CELL_POSITION_ONE = 1
+    const val CELL_POSITION_TWO = 2
 }

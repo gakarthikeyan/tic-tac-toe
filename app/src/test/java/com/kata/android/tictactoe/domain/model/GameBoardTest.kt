@@ -2,6 +2,7 @@ package com.kata.android.tictactoe.domain.model
 
 import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
@@ -47,5 +48,19 @@ class GameBoardTest {
             }
         )
         assertTrue(gameBoard.isBoardFull())
+    }
+
+    @Test
+    fun `board is not full when there are empty cells`() {
+        val gameBoard = GameBoard()
+        assertFalse(gameBoard.isBoardFull())
+    }
+
+    @Test
+    fun `cannot place mark on already occupied cell`() {
+        val gameBoard = GameBoard()
+        val newBoard = gameBoard.markPlayerPlace(CELL_POSITION_TWO, GamePlayer.X)
+        val result = newBoard.markPlayerPlace(CELL_POSITION_TWO, GamePlayer.O)
+        assertEquals(newBoard, result)
     }
 }
