@@ -1,6 +1,5 @@
 package com.kata.android.tictactoe.domain.model
 
-import android.util.Log
 import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
 
 data class GameBoard(
@@ -51,4 +50,6 @@ data class GameBoard(
         }
         return false
     }
+
+    fun isBoardEmpty(): Boolean = cells.all { it == null }
 }
