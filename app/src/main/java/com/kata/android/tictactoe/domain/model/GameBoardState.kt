@@ -28,6 +28,15 @@ data class GameBoardState(
             )
         }
 
+        if (newBoard.isBoardFull()) {
+            return GameBoardState(
+                gameBoard = newBoard,
+                currentPlayer = currentPlayer,
+                isGameOver = true,
+                gameBoardResult = GameBoardResult.DRAW
+            )
+        }
+
         return GameBoardState(
             gameBoard = newBoard,
             currentPlayer = currentPlayer.nextPlayer(),
