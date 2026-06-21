@@ -13,6 +13,7 @@ import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
+import kotlin.collections.get
 
 class GameBoardStateTest {
 
@@ -103,5 +104,26 @@ class GameBoardStateTest {
 
         assertTrue(state.isGameOver)
         assertEquals(GameBoardResult.DRAW, state.gameBoardResult)
+    }
+
+    @Test
+    fun `cannot play move on occupied cell`() {
+        val gameBoardState = GameBoardState()
+        var state = gameBoardState
+        state = state.playMove(CELL_POSITION_ZERO)
+        state = state.playMove(CELL_POSITION_ZERO)
+
+        assertEquals(GamePlayer.O, state.currentPlayer)
+    }
+
+    @Test
+    fun `game state is updated payer move and game board is updated`() {
+        val gameBoardState = GameBoardState()
+        val newGameState = gameBoardState.playMove(CELL_POSITION_FOUR)  
+
+        assertEquals(GamePlayer.O, newGameState.currentPlayer)
+        assertEquals(GamePlayer.X, newGameState.gameBoard.cells[CELL_POSITION_FOUR])
+        assertFalse(newGameState.isGameOver)
+        assertEquals(GameBoardResult.ONGOING, newGameState.gameBoardResult)
     }
 }
