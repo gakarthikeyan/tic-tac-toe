@@ -1,5 +1,5 @@
 package com.kata.android.tictactoe.domain.model
 
 enum class GameBoardResult {
-    ONGOING
+    ONGOING, X_WINS, O_WINS
 }
