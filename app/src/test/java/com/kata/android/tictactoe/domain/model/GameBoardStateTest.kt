@@ -13,7 +13,6 @@ import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
-import kotlin.collections.get
 
 class GameBoardStateTest {
 
@@ -119,7 +118,7 @@ class GameBoardStateTest {
     @Test
     fun `game state is updated payer move and game board is updated`() {
         val gameBoardState = GameBoardState()
-        val newGameState = gameBoardState.playMove(CELL_POSITION_FOUR)  
+        val newGameState = gameBoardState.playMove(CELL_POSITION_FOUR)
 
         assertEquals(GamePlayer.O, newGameState.currentPlayer)
         assertEquals(GamePlayer.X, newGameState.gameBoard.cells[CELL_POSITION_FOUR])
