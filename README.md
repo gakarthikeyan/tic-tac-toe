@@ -29,6 +29,3 @@ Implementation of Tic Tac Toe game is in progress with Test-Driven Development (
 
 ## Run all tests:
 ./gradlew test
-
-## Run specific test class (sample):
-./gradlew test --tests "*GameBoardTest*"
