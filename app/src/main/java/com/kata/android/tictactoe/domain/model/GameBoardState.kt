@@ -14,7 +14,7 @@ data class GameBoardState(
         val newBoard = gameBoard.markPlayerPlace(position, currentPlayer)
         return GameBoardState(
             gameBoard = newBoard,
-            currentPlayer = if (currentPlayer == GamePlayer.X) GamePlayer.O else GamePlayer.X,
+            currentPlayer = currentPlayer.nextPlayer(),
             isGameOver = false,
             gameBoardResult = GameBoardResult.ONGOING
         )

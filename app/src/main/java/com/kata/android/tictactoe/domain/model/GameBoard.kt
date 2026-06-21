@@ -1,6 +1,11 @@
 package com.kata.android.tictactoe.domain.model
 
 import com.kata.android.tictactoe.utils.Constants.BOARD_CELL_COUNT
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_EIGHT
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FOUR
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SIX
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
 
 data class GameBoard(
     val cells: List<GamePlayer?> = MutableList(BOARD_CELL_COUNT) { null }
@@ -41,11 +46,13 @@ data class GameBoard(
 
     fun hasWinningDiagonal(gamePlayer: GamePlayer): Boolean {
         // diagonal: 0-4-8
-        if (cells[0] == gamePlayer && cells[4] == gamePlayer && cells[8] == gamePlayer) {
+        if (cells[CELL_POSITION_ZERO] == gamePlayer && cells[CELL_POSITION_FOUR] == gamePlayer
+            && cells[CELL_POSITION_EIGHT] == gamePlayer) {
             return true
         }
         // diagonal: 2-4-6
-        if (cells[2] == gamePlayer && cells[4] == gamePlayer && cells[6] == gamePlayer) {
+        if (cells[CELL_POSITION_TWO] == gamePlayer && cells[CELL_POSITION_FOUR] == gamePlayer
+            && cells[CELL_POSITION_SIX] == gamePlayer) {
             return true
         }
         return false
