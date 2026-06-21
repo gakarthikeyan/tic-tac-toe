@@ -1,5 +1,6 @@
 package com.kata.android.tictactoe.domain.model
 
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_EIGHT
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FOUR
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SEVEN
@@ -66,5 +67,20 @@ class GameBoardStateTest {
 
         assertTrue(state.isGameOver)
         assertEquals(GameBoardResult.O_WINS, state.gameBoardResult)
+    }
+
+    @Test
+    fun `game is over when player wins with diagonal`() {
+        val gameBoardState = GameBoardState()
+        var state = gameBoardState
+
+        state = state.playMove(CELL_POSITION_ZERO)
+        state = state.playMove(CELL_POSITION_ONE)
+        state = state.playMove(CELL_POSITION_FOUR)
+        state = state.playMove(CELL_POSITION_TWO)
+        state = state.playMove(CELL_POSITION_EIGHT)
+
+        assertTrue(state.isGameOver)
+        assertEquals(GameBoardResult.X_WINS, state.gameBoardResult)
     }
 }

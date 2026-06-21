@@ -13,7 +13,8 @@ data class GameBoardState(
 
         val newBoard = gameBoard.markPlayerPlace(position, currentPlayer)
 
-        if (newBoard.hasWinningRow(currentPlayer) || newBoard.hasWinningColumn(currentPlayer)) {
+        if (newBoard.hasWinningRow(currentPlayer) || newBoard.hasWinningColumn(currentPlayer)
+            || newBoard.hasWinningDiagonal(currentPlayer)) {
 
             val gameResult = when (currentPlayer) {
                 GamePlayer.X -> GameBoardResult.X_WINS
