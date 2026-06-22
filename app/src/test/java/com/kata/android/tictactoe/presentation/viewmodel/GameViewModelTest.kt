@@ -3,6 +3,7 @@ package com.kata.android.tictactoe.presentation.viewmodel
 import com.kata.android.tictactoe.domain.model.GameBoardState
 import com.kata.android.tictactoe.domain.usecase.GameStateUseCase
 import com.kata.android.tictactoe.domain.usecase.PlayMoveUseCase
+import com.kata.android.tictactoe.domain.usecase.ResetGameUseCase
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -15,9 +16,11 @@ class GameViewModelTest {
 
     private val gameStateUseCase: GameStateUseCase = mockk()
     private val playMoveUseCase: PlayMoveUseCase = mockk()
+    private val resetGameUseCase: ResetGameUseCase = mockk()
     private val viewModel = GameViewModel(
         gameStateUseCase = gameStateUseCase,
         playMoveUseCase = playMoveUseCase,
+        resetGameUseCase = resetGameUseCase,
         dispatcher = Dispatchers.Unconfined
     )
 
@@ -27,7 +30,8 @@ class GameViewModelTest {
         coEvery { gameStateUseCase() } returns gameBoardState
 
         viewModel.initializeGame()
-        assertEquals(gameBoardState, viewModel.gameBoardState.value)
+        val actualState = viewModel.gameBoardState.value
+        assertEquals(gameBoardState, actualState)
     }
 
     @Test
@@ -39,6 +43,17 @@ class GameViewModelTest {
 
         viewModel.initializeGame()
         viewModel.movePlayer(CELL_POSITION_ZERO)
-        assertEquals(updatedState, viewModel.gameBoardState.value)
+        val actualState = viewModel.gameBoardState.value
+        assertEquals(updatedState, actualState)
+    }
+
+    @Test
+    fun `reset game clears the board`(): Unit = runBlocking {
+        val newGameBoardState = GameBoardState()
+        coEvery { resetGameUseCase() } returns newGameBoardState
+
+        viewModel.resetGame()
+        val actualState = viewModel.gameBoardState.value
+        assertEquals(newGameBoardState, actualState)
     }
 }
