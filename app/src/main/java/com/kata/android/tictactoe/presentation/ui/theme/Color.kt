@@ -1,4 +1,4 @@
-package com.kata.android.tictactoe.ui.theme
+package com.kata.android.tictactoe.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
