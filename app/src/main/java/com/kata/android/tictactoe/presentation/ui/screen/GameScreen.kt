@@ -1,9 +1,16 @@
 package com.kata.android.tictactoe.presentation.ui.screen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,10 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.kata.android.tictactoe.R
+import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
+import com.kata.android.tictactoe.utils.Dimens.dimen_16dp
+import com.kata.android.tictactoe.utils.Dimens.dimen_4dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_8dp
+import com.kata.android.tictactoe.utils.FontSize.font_18sp
 import com.kata.android.tictactoe.utils.FontSize.font_28sp
 import org.koin.androidx.compose.koinViewModel
 
@@ -27,21 +37,81 @@ fun GameScreen(
     val gameState = viewModel.gameBoardState.collectAsState()
 
     Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(dimen_16dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        Text(
-            text = stringResource(R.string.game_title),
-            fontSize = font_28sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-        Spacer(modifier = Modifier.height(dimen_8dp))
-        Text(
-            text = stringResource(R.string.label_current_player, gameState.value.currentPlayer),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.secondary
+        Column(
+            modifier = modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(R.string.game_title),
+                fontSize = font_28sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.height(dimen_8dp))
+            Text(
+                text = stringResource(R.string.label_current_player, gameState.value.currentPlayer),
+                fontSize = font_18sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        }
+
+        GameBoard(
+            board = gameState.value.gameBoard.cells
         )
     }
+}
+
+@Composable
+fun GameBoard(
+    board: List<GamePlayer?>,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+            .padding(dimen_16dp),
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        for (row in 0..2) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                for (col in 0..2) {
+                    val index = row * 3 + col
+                    GameCell(
+                        modifier = Modifier
+                            .weight(1f)
+                            .aspectRatio(1f)
+                            .padding(dimen_4dp),
+                        gamePlayer = board[index]
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GameCell(
+    modifier: Modifier = Modifier,
+    gamePlayer: GamePlayer?
+) {
+    Box(
+        modifier = modifier
+            .background(
+                color = MaterialTheme.colorScheme.surfaceVariant,
+                shape = MaterialTheme.shapes.small
+            ),
+        contentAlignment = Alignment.Center
+    ) {}
 }
