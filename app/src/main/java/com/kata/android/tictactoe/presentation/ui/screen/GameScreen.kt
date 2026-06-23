@@ -1,6 +1,7 @@
 package com.kata.android.tictactoe.presentation.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import com.kata.android.tictactoe.R
 import com.kata.android.tictactoe.domain.model.GamePlayer
@@ -63,7 +66,8 @@ fun GameScreen(
         }
 
         GameBoard(
-            board = gameState.value.gameBoard.cells
+            board = gameState.value.gameBoard.cells,
+            onClick = {}
         )
     }
 }
@@ -71,6 +75,7 @@ fun GameScreen(
 @Composable
 fun GameBoard(
     board: List<GamePlayer?>,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -93,7 +98,8 @@ fun GameBoard(
                             .weight(1f)
                             .aspectRatio(1f)
                             .padding(dimen_4dp),
-                        gamePlayer = board[index]
+                        gamePlayer = board[index],
+                        onClick = { onClick() }
                     )
                 }
             }
@@ -104,14 +110,17 @@ fun GameBoard(
 @Composable
 fun GameCell(
     modifier: Modifier = Modifier,
-    gamePlayer: GamePlayer?
+    gamePlayer: GamePlayer?,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
+            .semantics { contentDescription = "" }
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant,
                 shape = MaterialTheme.shapes.small
-            ),
+            )
+            .clickable(onClick = { onClick() }),
         contentAlignment = Alignment.Center
     ) {}
 }

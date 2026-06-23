@@ -3,6 +3,7 @@ package com.kata.android.tictactoe
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,10 +29,17 @@ class GameScreenTest {
         composeTestRule.waitForIdle()
 
         val cells = composeTestRule.onAllNodesWithContentDescription("")
-        if (cells.fetchSemanticsNodes().size == 9) {
-            composeTestRule.waitForIdle()
-            composeTestRule.onNodeWithText("").assertExists()
-        }
-        assert(cells.fetchSemanticsNodes().isEmpty())
+        assert(cells.fetchSemanticsNodes().isNotEmpty())
+        assert(cells.fetchSemanticsNodes().size >= 9)
+    }
+
+    @Test
+    fun checkAllNineCellsAreClickable() {
+        composeTestRule.waitForIdle()
+
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val nodesList = cells.fetchSemanticsNodes()
+        nodesList.forEachIndexed { index, _ -> cells[index].performClick() }
+        assert(nodesList.size >= 9) { "Expected at least 9 cells, found ${nodesList.size}" }
     }
 }
