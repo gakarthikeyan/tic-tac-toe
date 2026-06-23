@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.kata.android.tictactoe.presentation.ui.screen.GameScreen
 import com.kata.android.tictactoe.presentation.ui.theme.TicTacToeTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,34 +25,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             TicTacToeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(modifier = Modifier.padding(innerPadding))
+                    GameScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                modifier= Modifier.align(alignment = Alignment.CenterHorizontally),
-                text = "Game - Tic Tac Toe",
-            )
-        }
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TicTacToeTheme {
-        Greeting()
     }
 }
