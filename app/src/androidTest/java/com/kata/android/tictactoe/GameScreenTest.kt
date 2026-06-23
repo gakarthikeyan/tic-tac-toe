@@ -15,4 +15,10 @@ class GameScreenTest {
         val gameTitle = composeTestRule.activity.getString(R.string.game_title)
         composeTestRule.onNodeWithText(gameTitle).assertExists()
     }
+
+    @Test
+    fun checkPlayerLabelIsDisplayedInGameScreen() {
+        val playerLabel = composeTestRule.activity.getString(R.string.label_current_player, "X")
+        composeTestRule.onNodeWithText(playerLabel).assertExists()
+    }
 }
