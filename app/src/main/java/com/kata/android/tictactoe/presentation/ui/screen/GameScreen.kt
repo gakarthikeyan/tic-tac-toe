@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +24,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import com.kata.android.tictactoe.R
 import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
@@ -41,6 +41,10 @@ fun GameScreen(
 ) {
     val viewModel = koinViewModel<GameViewModel>()
     val gameState = viewModel.gameBoardState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.initializeGame()
+    }
 
     Column(
         modifier = Modifier
@@ -131,7 +135,11 @@ fun GameCell(
                 text = gamePlayer.name,
                 fontSize = font_32sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = when (gamePlayer) {
+                    GamePlayer.X -> MaterialTheme.colorScheme.primary
+                    GamePlayer.O -> MaterialTheme.colorScheme.tertiary
+                },
             )
         }
     }

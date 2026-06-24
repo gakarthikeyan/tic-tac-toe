@@ -1,10 +1,18 @@
 package com.kata.android.tictactoe
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.lifecycle.ViewModelProvider
+import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
+import junit.framework.TestCase.assertTrue
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -12,6 +20,18 @@ class GameScreenTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+    lateinit var viewModel: GameViewModel
+
+    @Before
+    fun setUp() {
+        viewModel =  ViewModelProvider(composeTestRule.activity)[GameViewModel::class.java]
+        viewModel.initializeGame()
+    }
+
+    @After
+    fun tearDown() {
+        viewModel.resetGame()
+    }
 
     @Test
     fun checkTitleIsDisplayedInGameScreen() {
@@ -50,5 +70,39 @@ class GameScreenTest {
         val cells = composeTestRule.onAllNodesWithContentDescription("")
         cells[CELL_POSITION_ZERO].performClick()
         composeTestRule.onNodeWithText("X").assertExists()
+    }
+
+    @Test
+    fun checkCurrentAndOpponentPlayerPlacedOnCell(){
+        composeTestRule.waitForIdle()
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+
+        cells[CELL_POSITION_ZERO].performClick()
+        composeTestRule.onNodeWithText("X").assertExists()
+
+        cells[CELL_POSITION_ONE].performClick()
+        composeTestRule.onNodeWithText("O").assertExists()
+    }
+
+    @Test
+    fun checkBoardContainsEmptyCellInOngoingMove() {
+        composeTestRule.waitForIdle()
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val nodesList = cells.fetchSemanticsNodes()
+        for(i in 0..2){
+            cells[i].performClick()
+            composeTestRule.waitForIdle()
+        }
+
+        val count = nodesList.count { node ->
+            val text = node.config
+                .getOrNull(SemanticsProperties.Text)
+                ?.joinToString("") { it.text }
+                .orEmpty()
+
+            text.isBlank()
+        }
+
+        assertTrue(count > 0)
     }
 }
