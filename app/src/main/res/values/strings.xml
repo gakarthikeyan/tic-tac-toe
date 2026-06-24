@@ -3,4 +3,5 @@
     <string name="game_title">Tic Tac Toe</string>
     <string name="label_current_player">Current Player: %s</string>
     <string name="player_x_win">Player X Won!</string>
+    <string name="player_o_win">Player O Won!</string>
 </resources>

@@ -69,6 +69,7 @@ fun GameScreen(
                 Text(
                     text = when (gameState.value.gameBoardResult) {
                         GameBoardResult.X_WINS -> stringResource(R.string.player_x_win)
+                        GameBoardResult.O_WINS -> stringResource(R.string.player_o_win)
                         else -> ""
                     },
                     fontSize = font_18sp,
