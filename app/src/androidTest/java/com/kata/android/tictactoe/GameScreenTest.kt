@@ -9,6 +9,9 @@ import androidx.compose.ui.test.performClick
 import androidx.lifecycle.ViewModelProvider
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SIX
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_THREE
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
 import junit.framework.TestCase.assertTrue
 import org.junit.After
@@ -35,12 +38,14 @@ class GameScreenTest {
 
     @Test
     fun checkTitleIsDisplayedInGameScreen() {
+        composeTestRule.waitForIdle()
         val gameTitle = composeTestRule.activity.getString(R.string.game_title)
         composeTestRule.onNodeWithText(gameTitle).assertExists()
     }
 
     @Test
     fun checkPlayerLabelIsDisplayedInGameScreen() {
+        composeTestRule.waitForIdle()
         val playerLabel = composeTestRule.activity.getString(R.string.label_current_player, "X")
         composeTestRule.onNodeWithText(playerLabel).assertExists()
     }
@@ -104,5 +109,24 @@ class GameScreenTest {
         }
 
         assertTrue(count > 0)
+    }
+
+    @Test
+    fun checkPlayer_X_WonTheGame(){
+        composeTestRule.waitForIdle()
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        cells[CELL_POSITION_ZERO].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_ONE].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_THREE].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_TWO].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_SIX].performClick()
+        composeTestRule.waitForIdle()
+
+        val xWon = composeTestRule.activity.getString(R.string.player_x_win)
+        composeTestRule.onNodeWithText(xWon).assertExists()
     }
 }

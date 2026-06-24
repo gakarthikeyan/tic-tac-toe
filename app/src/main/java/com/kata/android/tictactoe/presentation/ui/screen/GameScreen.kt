@@ -25,6 +25,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.kata.android.tictactoe.R
+import com.kata.android.tictactoe.domain.model.GameBoardResult
 import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
 import com.kata.android.tictactoe.utils.Dimens.dimen_16dp
@@ -64,12 +65,25 @@ fun GameScreen(
                 color = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.height(dimen_8dp))
-            Text(
-                text = stringResource(R.string.label_current_player, gameState.value.currentPlayer),
-                fontSize = font_18sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.secondary
-            )
+            if (gameState.value.isGameOver) {
+                Text(
+                    text = when (gameState.value.gameBoardResult) {
+                        GameBoardResult.X_WINS -> stringResource(R.string.player_x_win)
+                        else -> ""
+                    },
+                    fontSize = font_18sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.tertiary,
+                    textAlign = TextAlign.Center
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.label_current_player, gameState.value.currentPlayer),
+                    fontSize = font_18sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
         }
 
         GameBoard(
