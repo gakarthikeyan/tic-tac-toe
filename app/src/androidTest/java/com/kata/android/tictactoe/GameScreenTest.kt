@@ -8,6 +8,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.lifecycle.ViewModelProvider
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_EIGHT
+import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FIVE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_FOUR
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ONE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SEVEN
@@ -151,5 +153,32 @@ class GameScreenTest {
 
         val oWon = composeTestRule.activity.getString(R.string.player_o_win)
         composeTestRule.onNodeWithText(oWon).assertExists()
+    }
+
+    @Test
+    fun checkGameEndsWithDraw(){
+        composeTestRule.waitForIdle()
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        cells[CELL_POSITION_ZERO].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_ONE].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_TWO].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_FOUR].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_SEVEN].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_THREE].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_FIVE].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_EIGHT].performClick()
+        composeTestRule.waitForIdle()
+        cells[CELL_POSITION_SIX].performClick()
+        composeTestRule.waitForIdle()
+
+        val gameDraw = composeTestRule.activity.getString(R.string.game_draw)
+        composeTestRule.onNodeWithText(gameDraw).assertExists()
     }
 }
