@@ -181,4 +181,11 @@ class GameScreenTest {
         val gameDraw = composeTestRule.activity.getString(R.string.game_draw)
         composeTestRule.onNodeWithText(gameDraw).assertExists()
     }
+
+    @Test
+    fun checkResetButtonIsDisplayed(){
+        composeTestRule.waitForIdle()
+        val resetGame = composeTestRule.activity.getString(R.string.reset_game)
+        composeTestRule.onNodeWithText(resetGame).assertExists()
+    }
 }

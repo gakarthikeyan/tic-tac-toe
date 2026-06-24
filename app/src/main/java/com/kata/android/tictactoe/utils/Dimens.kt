@@ -6,4 +6,5 @@ object Dimens {
     val dimen_4dp = 4.dp
     val dimen_8dp = 8.dp
     val dimen_16dp = 16.dp
+    val dimen_48dp = 48.dp
 }

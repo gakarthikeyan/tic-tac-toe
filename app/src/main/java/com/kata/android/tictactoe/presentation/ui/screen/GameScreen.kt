@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +30,7 @@ import com.kata.android.tictactoe.domain.model.GameBoardResult
 import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
 import com.kata.android.tictactoe.utils.Dimens.dimen_16dp
+import com.kata.android.tictactoe.utils.Dimens.dimen_48dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_4dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_8dp
 import com.kata.android.tictactoe.utils.FontSize.font_18sp
@@ -52,7 +54,7 @@ fun GameScreen(
             .fillMaxSize()
             .padding(dimen_16dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         Column(
             modifier = modifier.fillMaxWidth(),
@@ -92,6 +94,19 @@ fun GameScreen(
             board = gameState.value.gameBoard.cells,
             onClick = { position -> viewModel.movePlayer(position) }
         )
+
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(dimen_48dp),
+            onClick = {}
+        ) {
+            Text(
+                text = stringResource(R.string.reset_game),
+                fontSize = font_18sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+        }
     }
 }
 
@@ -103,8 +118,7 @@ fun GameBoard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f)
-            .padding(dimen_16dp),
+            .aspectRatio(1f),
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         for (row in 0..2) {
