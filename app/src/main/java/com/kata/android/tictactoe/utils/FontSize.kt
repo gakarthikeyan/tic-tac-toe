@@ -5,4 +5,5 @@ import androidx.compose.ui.unit.sp
 object FontSize {
     val font_18sp = 18.sp
     val font_28sp = 28.sp
+    val font_32sp = 32.sp
 }

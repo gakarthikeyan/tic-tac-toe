@@ -22,6 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.kata.android.tictactoe.R
 import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
@@ -30,6 +32,7 @@ import com.kata.android.tictactoe.utils.Dimens.dimen_4dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_8dp
 import com.kata.android.tictactoe.utils.FontSize.font_18sp
 import com.kata.android.tictactoe.utils.FontSize.font_28sp
+import com.kata.android.tictactoe.utils.FontSize.font_32sp
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -67,7 +70,7 @@ fun GameScreen(
 
         GameBoard(
             board = gameState.value.gameBoard.cells,
-            onClick = {}
+            onClick = { position -> viewModel.movePlayer(position) }
         )
     }
 }
@@ -75,7 +78,7 @@ fun GameScreen(
 @Composable
 fun GameBoard(
     board: List<GamePlayer?>,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -99,7 +102,7 @@ fun GameBoard(
                             .aspectRatio(1f)
                             .padding(dimen_4dp),
                         gamePlayer = board[index],
-                        onClick = { onClick() }
+                        onClick = { onClick(index) }
                     )
                 }
             }
@@ -122,5 +125,14 @@ fun GameCell(
             )
             .clickable(onClick = { onClick() }),
         contentAlignment = Alignment.Center
-    ) {}
+    ) {
+        gamePlayer?.let {
+            Text(
+                text = gamePlayer.name,
+                fontSize = font_32sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
 }
