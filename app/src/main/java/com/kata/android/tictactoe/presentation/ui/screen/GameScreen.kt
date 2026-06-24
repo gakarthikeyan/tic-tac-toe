@@ -99,7 +99,7 @@ fun GameScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(dimen_48dp),
-            onClick = {}
+            onClick = { viewModel.resetGame() }
         ) {
             Text(
                 text = stringResource(R.string.reset_game),

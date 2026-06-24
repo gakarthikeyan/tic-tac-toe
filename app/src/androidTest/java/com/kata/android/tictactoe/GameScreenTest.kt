@@ -188,4 +188,25 @@ class GameScreenTest {
         val resetGame = composeTestRule.activity.getString(R.string.reset_game)
         composeTestRule.onNodeWithText(resetGame).assertExists()
     }
+
+    @Test
+    fun checkResetGameWithResetButton(){
+        composeTestRule.waitForIdle()
+        val resetGame = composeTestRule.activity.getString(R.string.reset_game)
+        composeTestRule.onNodeWithText(resetGame).performClick()
+
+        composeTestRule.waitForIdle()
+        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val nodesList = cells.fetchSemanticsNodes()
+        val count = nodesList.count { node ->
+            val text = node.config
+                .getOrNull(SemanticsProperties.Text)
+                ?.joinToString("") { it.text }
+                .orEmpty()
+
+            text.isBlank()
+        }
+
+        assertTrue(count >= 9)
+    }
 }
