@@ -35,8 +35,11 @@ The Tic Tac Toe developed with Test-Driven Development (TDD) approach along with
 
 ## Game Screens:
 
-✅![Game Start!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/start.png)
+✅ #Game Start!
+<img src="screenshots/start.png" width="250">
 
-✅![Player X Won!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/won.png)
+✅ #Player X Won!
+<img src="screenshots/won.png" width="250">
 
-✅![Game Draw!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/draw.png)
+✅ #Game Draw!
+<img src="screenshots/draw.png" width="250">
