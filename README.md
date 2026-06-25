@@ -1,5 +1,6 @@
 # Tic Tac Toe - a Android Game with TDD Approach
 
+<img src="app/src/main/ic_launcher_playstore.png" width="40" alt="Game Logo">
 The Tic Tac Toe developed with Test-Driven Development (TDD) approach along with clean architecture, MVVM pattern and Koin dependency injection.
 
 ## Game Rules:
