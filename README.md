@@ -1,6 +1,6 @@
 # Tic Tac Toe - a Android Game with TDD Approach
 
-Implementation of Tic Tac Toe game is in progress with Test-Driven Development (TDD) approach with clean architecture, MVVM pattern, and Koin dependency injection.
+The Tic Tac Toe developed with Test-Driven Development (TDD) approach along with clean architecture, MVVM pattern and Koin dependency injection.
 
 ## Game Rules:
 
@@ -32,3 +32,11 @@ Implementation of Tic Tac Toe game is in progress with Test-Driven Development (
 
 ## Run Instrumentation tests:
 ./gradlew connectedAndroidTest
+
+## Game Screens:
+
+✅![Game Start!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/start.png)
+
+✅![Player X Won!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/won.png)
+
+✅![Game Draw!](https://github.com/gakarthikeyan/tic-tac-toe/blob/master/screenshots/draw.png)
