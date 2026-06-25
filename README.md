@@ -35,11 +35,8 @@ The Tic Tac Toe developed with Test-Driven Development (TDD) approach along with
 
 ## Game Screens:
 
-✅ #Game Start!
-<img src="screenshots/start.png" width="250">
+✅ Game Start!<img src="screenshots/start.png" width="250">
 
-✅ #Player X Won!
-<img src="screenshots/won.png" width="250">
+✅ Player X Won!<img src="screenshots/won.png" width="250">
 
-✅ #Game Draw!
-<img src="screenshots/draw.png" width="250">
+✅ Game Draw!<img src="screenshots/draw.png" width="250">
