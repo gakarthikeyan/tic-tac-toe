@@ -12,4 +12,8 @@ object Constants {
     const val CELL_POSITION_SIX = 6
     const val CELL_POSITION_SEVEN = 7
     const val CELL_POSITION_EIGHT = 8
+
+    const val TEST_PLAYER_X = "X"
+    const val TEST_PLAYER_O = "O"
+    const val EMPTY = ""
 }

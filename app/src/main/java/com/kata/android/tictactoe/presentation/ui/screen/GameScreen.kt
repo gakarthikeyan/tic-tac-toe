@@ -29,6 +29,7 @@ import com.kata.android.tictactoe.R
 import com.kata.android.tictactoe.domain.model.GameBoardResult
 import com.kata.android.tictactoe.domain.model.GamePlayer
 import com.kata.android.tictactoe.presentation.viewmodel.GameViewModel
+import com.kata.android.tictactoe.utils.Constants.EMPTY
 import com.kata.android.tictactoe.utils.Dimens.dimen_16dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_48dp
 import com.kata.android.tictactoe.utils.Dimens.dimen_4dp
@@ -73,7 +74,7 @@ fun GameScreen(
                         GameBoardResult.X_WINS -> stringResource(R.string.player_x_win)
                         GameBoardResult.O_WINS -> stringResource(R.string.player_o_win)
                         GameBoardResult.DRAW -> stringResource(R.string.game_draw)
-                        else -> ""
+                        else -> EMPTY
                     },
                     fontSize = font_18sp,
                     fontWeight = FontWeight.SemiBold,
@@ -152,7 +153,7 @@ fun GameCell(
 ) {
     Box(
         modifier = modifier
-            .semantics { contentDescription = "" }
+            .semantics { contentDescription = EMPTY }
             .background(
                 color = MaterialTheme.colorScheme.surfaceVariant,
                 shape = MaterialTheme.shapes.small

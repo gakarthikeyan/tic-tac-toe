@@ -17,6 +17,9 @@ import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_SIX
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_THREE
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_TWO
 import com.kata.android.tictactoe.utils.Constants.CELL_POSITION_ZERO
+import com.kata.android.tictactoe.utils.Constants.EMPTY
+import com.kata.android.tictactoe.utils.Constants.TEST_PLAYER_O
+import com.kata.android.tictactoe.utils.Constants.TEST_PLAYER_X
 import junit.framework.TestCase.assertTrue
 import org.junit.After
 import org.junit.Before
@@ -58,7 +61,7 @@ class GameScreenTest {
     fun checkGameBoardIsDisplayedInGameScreen() {
         composeTestRule.waitForIdle()
 
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         assert(cells.fetchSemanticsNodes().isNotEmpty())
         assert(cells.fetchSemanticsNodes().size >= 9)
     }
@@ -67,7 +70,7 @@ class GameScreenTest {
     fun checkAllNineCellsAreClickable() {
         composeTestRule.waitForIdle()
 
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         val nodesList = cells.fetchSemanticsNodes()
         nodesList.forEachIndexed { index, _ -> cells[index].performClick() }
         assert(nodesList.size >= 9) { "Expected at least 9 cells, found ${nodesList.size}" }
@@ -76,27 +79,27 @@ class GameScreenTest {
     @Test
     fun checkAbleToPlacePlayerOnCell(){
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         cells[CELL_POSITION_ZERO].performClick()
-        composeTestRule.onNodeWithText("X").assertExists()
+        composeTestRule.onNodeWithText(TEST_PLAYER_X).assertExists()
     }
 
     @Test
     fun checkCurrentAndOpponentPlayerPlacedOnCell(){
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
 
         cells[CELL_POSITION_ZERO].performClick()
-        composeTestRule.onNodeWithText("X").assertExists()
+        composeTestRule.onNodeWithText(TEST_PLAYER_X).assertExists()
 
         cells[CELL_POSITION_ONE].performClick()
-        composeTestRule.onNodeWithText("O").assertExists()
+        composeTestRule.onNodeWithText(TEST_PLAYER_O).assertExists()
     }
 
     @Test
     fun checkBoardContainsEmptyCellInOngoingMove() {
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         val nodesList = cells.fetchSemanticsNodes()
         for(i in 0..2){
             cells[i].performClick()
@@ -106,7 +109,7 @@ class GameScreenTest {
         val count = nodesList.count { node ->
             val text = node.config
                 .getOrNull(SemanticsProperties.Text)
-                ?.joinToString("") { it.text }
+                ?.joinToString(EMPTY) { it.text }
                 .orEmpty()
 
             text.isBlank()
@@ -118,7 +121,7 @@ class GameScreenTest {
     @Test
     fun checkPlayer_X_WonTheGame(){
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         cells[CELL_POSITION_ZERO].performClick()
         composeTestRule.waitForIdle()
         cells[CELL_POSITION_ONE].performClick()
@@ -137,7 +140,7 @@ class GameScreenTest {
     @Test
     fun checkPlayer_O_WonTheGame(){
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         cells[CELL_POSITION_ZERO].performClick()
         composeTestRule.waitForIdle()
         cells[CELL_POSITION_ONE].performClick()
@@ -158,7 +161,7 @@ class GameScreenTest {
     @Test
     fun checkGameEndsWithDraw(){
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         cells[CELL_POSITION_ZERO].performClick()
         composeTestRule.waitForIdle()
         cells[CELL_POSITION_ONE].performClick()
@@ -196,12 +199,12 @@ class GameScreenTest {
         composeTestRule.onNodeWithText(resetGame).performClick()
 
         composeTestRule.waitForIdle()
-        val cells = composeTestRule.onAllNodesWithContentDescription("")
+        val cells = composeTestRule.onAllNodesWithContentDescription(EMPTY)
         val nodesList = cells.fetchSemanticsNodes()
         val count = nodesList.count { node ->
             val text = node.config
                 .getOrNull(SemanticsProperties.Text)
-                ?.joinToString("") { it.text }
+                ?.joinToString(EMPTY) { it.text }
                 .orEmpty()
 
             text.isBlank()
